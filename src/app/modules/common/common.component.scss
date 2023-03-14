@@ -1,0 +1,219 @@
+.component {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.left-menu {
+  flex-shrink: 0;
+  width: 324px;
+  height: 100%;
+  display: flex;
+  background-color: #003da5;
+  //justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logo {
+  width: 188.25px;
+  height: 48px;
+  margin-top: 50px;
+  margin-bottom: 130px;
+}
+
+.content-leftmenu {
+  color: #fcfcfc;
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.clipboard {
+  width: 25px;
+  height: 25px;
+  margin-right: 13px;
+  margin-top: 13px;
+}
+
+.frit-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.ic-User {
+  width: 27px;
+  height: 24px;
+  margin-right: 15px;
+  margin-top: 13px;
+}
+
+.title {
+  width: 95%;
+  height: 70px;
+  //background-color: red;
+  padding-right: 20px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.ic-git {
+  width: 25px;
+  height: 25px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.bodyRight {
+  background-color: #fcfcfc;
+  width: 1516px;
+  height: 80px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 20px;
+}
+.role{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 10px;
+}
+
+.nameUser {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.Role {
+  font-size: 18px;
+  color: #4f4f4f;
+}
+
+:host ::ng-deep .ui-slidemenu {
+  width: 13.5em;
+}
+
+.dropbtn {
+  background-color: #fcfcfc;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0;
+  border-radius: 15px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content .dropdown-button:hover {
+  background-color: #f1f1f1;
+  border-radius: 15px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.setting {
+  width: 16px;
+  height: 16px;
+}
+
+.dropdown-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-bottom: gray;
+}
+
+.txtSetting {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.bodyRight2 {
+  flex-grow: 1;
+  overflow: auto;
+  background-color: #fcfcfc;
+  border-radius: 4px;
+  padding: 20px 20px 0px 20px;
+  margin-top: 20px;
+  box-shadow: inset 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.allbody {
+  padding: 40px;
+}
+
+.buton-leftmenu {
+  background-color: #003da5;
+  border-style: none;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.buton-leftmenu :hover,
+.buton-leftmenu.active {
+  background-color: #0095d9;
+  border-radius: 8px;
+}
+
+.btnListUser {
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+}
+.buttonTranslate{
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.language{
+  border-style: none;
+  background-color: #FCFCFC
+}
+.language :hover{
+  border-style: none;
+  background-color: #2196F3
+}
+.us{
+  width: 40px;
+  height: 40px;
+}

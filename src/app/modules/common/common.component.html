@@ -1,0 +1,96 @@
+<div class="component">
+  <div class="left-menu">
+    <img src="./assets/images/logoAqua.png" class="logo" />
+    <div class="p-text-center">
+      <ng-container *ngIf="userRole === 'PPC' || userRole === 'admin' || userRole === 'accountant'">
+        <div class="frit-title">
+          <img src="./assets/images/clipboard.png" class="clipboard" />
+          <h4 class="content-leftmenu">{{'process.title' | translate}}</h4>
+        </div>
+        <div class="title" *ngIf="userRole === 'PPC' || userRole === 'admin'">
+          <button class="buton-leftmenu" [ngClass]="{ active: currentPage === 'list-ppc' }"
+            [routerLink]="['/common/list-ppc']">
+            <div class="btnListUser">
+              <img src="./assets/images/git-commit.png" class="ic-git" />
+              <p class="content-leftmenu">{{'listPPC.title' | translate}}</p>
+            </div>
+          </button>
+        </div>
+        <div class="title" *ngIf="userRole === 'accountant'">
+          <button class="buton-leftmenu" [ngClass]="{ active: currentPage === 'list-ppc-v3' }"
+            [routerLink]="['/common/list-ppc-v3']">
+            <div class="btnListUser">
+              <img src="./assets/images/git-commit.png" class="ic-git" />
+              <p class="content-leftmenu">{{'listPPCV3.title' | translate}}</p>
+            </div>
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="userRole === 'admin'">
+        <div class="frit-title">
+          <img src="./assets/images/User.png" class="ic-User" />
+          <h4 class="content-leftmenu">{{'UseManagernent.title' | translate}}</h4>
+        </div>
+        <div class="title">
+          <button class="buton-leftmenu" [ngClass]="{ active: currentPage === 'list-user' }"
+            [routerLink]="['/common/list-user']">
+            <div class="btnListUser">
+              <img src="./assets/images/git-commit.png" class="ic-git" />
+              <p class="content-leftmenu">{{'listUser.title' | translate}}</p>
+            </div>
+          </button>
+        </div>
+        <div class="title">
+          <button class="buton-leftmenu" [ngClass]="{ active: currentPage === 'list-user-approval' }"
+            [routerLink]="['/common/list-user-approval']">
+            <div class="btnListUser">
+              <img src="./assets/images/git-commit.png" class="ic-git" />
+              <p class="content-leftmenu">{{'listUserApproval.title' | translate}}</p>
+            </div>
+          </button>
+        </div>
+        <div class="title">
+          <button class="buton-leftmenu" [ngClass]="{ active: currentPage === 'list-user-request' }"
+            [routerLink]="['/common/list-user-request']">
+            <div class="btnListUser">
+              <img src="./assets/images/git-commit.png" class="ic-git" />
+              <p class="content-leftmenu">{{'listUserRequest.title' | translate}}</p>
+            </div>
+          </button>
+        </div>l
+      </ng-container>
+    </div>
+  </div>
+  <div class="allbody d-flex flex-column w-100">
+    <div class="bodyRight w-100">
+      <div class="buttonTranslate">
+        <button class="language" (click)="switchLanguage('en')">
+          <img src="./assets/images/united-states.png" class="us">
+        </button>
+        <button class="language" (click)="switchLanguage('vn')">
+          <img src="./assets/images/vietnam.png" class="us">
+        </button>
+      </div>
+      <div class="role">
+        <div class="name" *ngIf="userInfo">
+          <h5 class="nameUser">{{userInfo.userName}}</h5>
+          <h6 class="Role">{{'Role.title' | translate}} : {{userRole}}</h6>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn">
+            <p-avatar [image]="imgUrl" size="large" shape="circle"></p-avatar>
+          </button>
+          <div class="dropdown-content">
+            <div class="dropdown-button" (click)="handleLogout()">
+              <img src="./assets/images/icon-power.png" class="setting" />
+              <a class="txtSetting">Log out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bodyRight2 w-100">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

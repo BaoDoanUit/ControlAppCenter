@@ -1,0 +1,189 @@
+<div class="bodyAll d-flex flex-column">
+  <div class="header">
+    <div class="sreach">
+      <span class="p-input-icon-left ">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText [placeholder]="'Search.title' | translate" class="txtsreach"
+          [(ngModel)]="searchKeyWord" />
+      </span>
+      <button pButton type="button" [label]="'Search.title' | translate" class="p-button-outlined btnsearch"
+        (click)="handleGetListPPC()"></button>
+    </div>
+    <div class="dropdow">
+      <p-dropdown [options]="ppcOption" [(ngModel)]="selectedPPCId" optionLabel="name" optionValue="id"
+        [style]="{ minWidth: '240px' }" class="statusdrop" [placeholder]="'selectstatus.title' | translate"
+        (onChange)="handleGetListPPC()">
+      </p-dropdown>
+      <div class="p-field  ">
+        <p-calendar [showIcon]="true" class="calendar" [style]="{ minWidth: '449px' }" selectionMode="range"
+          [(ngModel)]="rangeDates" (onClose)="handleGetListPPC()">
+        </p-calendar>
+      </div>
+    </div>
+  </div>
+
+  <div class="table h-100 mb-0">
+    <p-table class="tablein" selectionMode="multiple" [paginator]="true" [rows]="7" [value]="ppcList">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="userSubmited">
+            {{'UserSubmited.title' | translate}} <p-sortIcon field="userSubmited"></p-sortIcon>
+          </th>
+          <th pSortableColumn="serialNumber">
+            {{'SerialNumber.title' | translate}}
+            <p-sortIcon field="serialNumber"></p-sortIcon>
+          </th>
+          <th pSortableColumn="modelName">
+            {{'ModalName.title' | translate}} <p-sortIcon field="modelName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="customerName">
+            {{'CustomerName.title' | translate}} <p-sortIcon field="customerName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="dateSubmited">
+            {{'DateSubmited.title' | translate}} <p-sortIcon field="dateSubmited"></p-sortIcon>
+          </th>
+          <th pSortableColumn="waitingDay">
+            {{'WaittingDay.title' | translate}} <p-sortIcon field="waitingDay"></p-sortIcon>
+          </th>
+          <th pSortableColumn="status">
+            {{'Status.title' | translate}} <p-sortIcon field="status"></p-sortIcon>
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-ppc let-rowIndex="rowIndex" class="fronttable">
+        <tr>
+          <td class="custumSerialnumber">{{ ppc.userSubmited }}</td>
+          <td class="custumSerialnumber">{{ ppc.serialNumber }}</td>
+          <td class="custumSerialnumber">{{ ppc.modelName }}</td>
+          <td class="custumSerialnumber">{{ ppc.customerName }}</td>
+          <td class="custumSerialnumber">{{ ppc.dateSubmited | dateCompact }}</td>
+          <td class="custumSerialnumber">{{ ppc.waitingDay }}</td>
+          <td>
+            <div [ngClass]="{
+                outofstock: ppc.status === 'Rejected',
+                lowstock: ppc.status === 'In Progress',
+                instock: ppc.status === 'Approved',
+                motostock: ppc.status === 'Canceled'
+              }">
+              {{ ppc.status }}
+            </div>
+          </td>
+          <td class="text-center" style="width: 70px">
+            <button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"
+              (click)="showModal(ppc.id)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <p-dialog [header]="'PPCDetail.title' | translate" [(visible)]="displayDetailPPC" [modal]="true"
+    [style]="{ width: '45%' }" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <p class="stastuspopup">{{'GeneralInformation.title' | translate}}</p>
+    <div class="AllBodyHaeder ">
+      <div class="bodyHeader">
+        <div class="txtmodal">
+          <p class="name">{{'SerialNumber.title' | translate}}:</p>
+          <input [disabled]="ppcDetailData.status !== 'In Progress'" class="inputName" type="text" pInputText
+            [(ngModel)]="ppcDetailData.serialNumber" (blur)="handleCheckValidate()" />
+        </div>
+        <div class="txtmodal">
+          <p class="name">{{'ModalName.title' | translate}}:</p>
+          <input [disabled]="true" class="inputName" type="text" pInputText [(ngModel)]="ppcDetailData.modelName"
+            (blur)="handleCheckValidate()" />
+        </div>
+        <div class="txtmodal">
+          <p class="name">{{'Selloutdate.title' | translate}}:</p>
+          <p-calendar [disabled]="ppcDetailData.status !== 'In Progress'" [showIcon]="true" class="inputName"
+            [(ngModel)]="ppcDetailData.selloutDate" (onClose)="handleCheckValidate()">
+          </p-calendar>
+        </div>
+      </div>
+      <div class="bodyHeader">
+        <div class="txtmodal">
+          <p class="name">{{'CustomerName.title' | translate}}:</p>
+          <input [disabled]="ppcDetailData.status !== 'In Progress'" class="inputName" type="text" pInputText
+            [(ngModel)]="ppcDetailData.customerName" (blur)="handleCheckValidate()" />
+        </div>
+        <div class="txtmodal">
+          <p class="name">{{'CustomerPhone.title' | translate}}:</p>
+          <input [disabled]="ppcDetailData.status !== 'In Progress'" class="inputName" type="text" pInputText
+            [(ngModel)]="ppcDetailData.customerPhone" (blur)="handleCheckValidate()" />
+        </div>
+        <div class="txtmodal">
+          <p class="name">{{'Status.title' | translate}}:</p>
+          <input disabled class="inputName" type="text" pInputText [(ngModel)]="ppcDetailData.status" />
+        </div>
+      </div>
+    </div>
+    <p class="stastuspopup">{{'Evidence.title' | translate}}</p>
+    <div class="Evidence">
+      <div *ngFor="let evidence of ppcDetailData.evidence">
+        <p>{{ evidence.category }}</p>
+        <div type="btnimage">
+          <img [src]="
+              evidence.url ? evidence.url : '../../../assets/images/noImage.png'
+            " class="imageRedvoid" (click)="takePhoto(evidence.url)" />
+        </div>
+      </div>
+    </div>
+    <p class="stastuspopup">{{'Validation.title' | translate}}</p>
+    <div class="Validation">
+      <div class="validation-row">
+        <div class="inputtxext-title">{{'Description.title' | translate}}</div>
+        <div class="inputtxext-title">{{'Status.title' | translate}}</div>
+      </div>
+      <div class="validation-row" *ngFor="let validation of ppcDetailData.validation">
+        <div class="inputtxext-title">{{validation.description}}</div>
+        <div class="inputtxext-title" [ngStyle]="{ 'background-color': '#' + validation.color, color: 'white' }">
+          {{validation.status}}</div>
+      </div>
+    </div>
+    <p class="stastuspopup">{{'note.title' | translate}}</p>
+    <textarea rows="7" cols="30" pInputTextarea class="note" aria-label="write"
+      [(ngModel)]="ppcDetailData.note"></textarea>
+    <p class="stastuspopup">{{'Activity.title' | translate}}</p>
+    <div class="ava" *ngFor="let activity of ppcDetailData.activity">
+      <p-avatar [image]="activity.avatar" shape="circle" size="large" class="footerAvata"></p-avatar>
+      <div>
+        <div class="any">
+          <p>{{'Username.title' | translate}}: &nbsp;</p>
+          <p>{{ activity.createdBy }}</p>
+        </div>
+        <div class="any">
+          <p>{{'Activity.title' | translate}}: &nbsp;</p>
+          <p>{{ activity.activity }}</p>
+        </div>
+        <div class="any">
+          <p>{{'comment.title' | translate}}: &nbsp;</p>
+          <p>{{ activity.comment }}</p>
+        </div>
+        <div class="any3">
+          <i class="pi pi-clock iconclock"></i>
+          <p class="timetext">{{ activity.createdAt | dateTime }}</p>
+        </div>
+      </div>
+    </div>
+    <p class="stastuspopup">{{'comment.title' | translate}}</p>
+    <textarea rows="3" cols="3" pInputTextarea class="note" aria-label="write"
+      [(ngModel)]="ppcDetailData.comment"></textarea>
+    <div class="buttomfooter" *ngIf="ppcDetailData.status === 'In Progress'">
+      <button class="btnReject" (click)="handleUpdate('Rejected')">
+        <i class="pi pi-times icon" style="font-size: 20px"></i>
+        <h5 class="statusr">{{'REJECT.title' | translate}}</h5>
+      </button>
+      <button class="btnsubmit" (click)="handleUpdate('Approved')">
+        <i class="pi pi-check-circle icon" style="font-size: 20px"></i>
+        <h5 class="statusr">{{'APPROVE.title' | translate}}</h5>
+      </button>
+    </div>
+  </p-dialog>
+  <p-confirmDialog [header]="'Confirmation.title' | translate" [style]="{width: '600px'}" [baseZIndex]="10000">
+  </p-confirmDialog>
+  <p-toast position="top-center"></p-toast>
+  <p-dialog [header]="'Image.title' | translate" [(visible)]="displayPhoto" [baseZIndex]="12000"
+    [style]="{ width: '45%' }" class="dialogshowimage">
+    <img [src]="imagetoshowdetailUrl ? imagetoshowdetailUrl : '../../../assets/images/noImage.png' " alt="sdfadsfdsf"
+      class="imageshow">
+  </p-dialog>
+</div>

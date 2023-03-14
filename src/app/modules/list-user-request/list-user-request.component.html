@@ -1,0 +1,226 @@
+<div class="bodyAll d-flex flex-column">
+  <div class="header">
+    <div class="sreach">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText [placeholder]="'Search.title' | translate" class="txtsreach"
+          [(ngModel)]="searchKeywords" />
+      </span>
+      <button pButton type="button" [label]="'Search.title' | translate" class="p-button-outlined btnsearch"
+        (click)="handleGetListUser()"></button>
+    </div>
+    <div class="dropdow">
+      <p-dropdown [options]="RequestOption" [(ngModel)]="requestTypeOption" optionLabel="name" optionValue="id"
+        [style]="{ minWidth: '240px' }" class="statusdrop" [placeholder]="'Select Request Status.title' | translate"
+        (onChange)="handleGetListUser()">
+      </p-dropdown>
+    </div>
+    <div class="dropdow">
+      <p-dropdown [options]="ApproveOption" [(ngModel)]="selectedOption" optionLabel="name" optionValue="id"
+        [style]="{ minWidth: '240px' }" class="statusdrop" [placeholder]="'Select Status.title' | translate"
+        (onChange)="handleGetListUser()">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <div class="table h-100 mb-0" *ngIf="!!Listuser">
+    <p-table class="tablein" selectionMode="multiple" [paginator]="true" [rows]="8" [value]="Listuser">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="full_name" class="txttable">
+            {{'Username.title' | translate}} <p-sortIcon field="full_name"> </p-sortIcon>
+          </th>
+          <th pSortableColumn="email">
+            {{'Email.title' | translate}} <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th pSortableColumn="phone">
+            {{'Phone.title' | translate}} <p-sortIcon field="phone"></p-sortIcon>
+          </th>
+          <th pSortableColumn="date_birth">
+            {{'DateBirth.title' | translate}} <p-sortIcon field="date_birth"></p-sortIcon>
+          </th>
+          <th pSortableColumn="id_card">
+            {{'IDCard.title' | translate}} <p-sortIcon field="id_card"></p-sortIcon>
+          </th>
+          <th pSortableColumn="id_date">
+            {{'IDDate.title' | translate}} <p-sortIcon field="id_date"></p-sortIcon>
+          </th>
+          <th pSortableColumn="id_place">
+            {{'IDPlace.title' | translate}} <p-sortIcon field="id_place"></p-sortIcon>
+          </th>
+
+          <th pSortableColumn="request_type">
+            {{'RequestType.title' | translate}} <p-sortIcon field="request_type"></p-sortIcon>
+          </th>
+          <th pSortableColumn="approve">
+            {{'Approve.title' | translate}} <p-sortIcon field="approve"></p-sortIcon>
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td class="custumSerialnumber">{{ user.full_name }}</td>
+          <td class="custumSerialnumber">{{ user.email }}</td>
+          <td class="custumSerialnumber">{{ user.phone }}</td>
+          <td class="custumSerialnumber">{{ user.date_birth | date }}</td>
+          <td class="custumSerialnumber">{{ user.id_card }}</td>
+          <td class="custumSerialnumber">{{ user.id_date | date }}</td>
+          <td class="custumSerialnumber">{{ user.id_place }}</td>
+          <td class="custumSerialnumber">{{ user.request_type }}</td>
+          <td class="custumSerialnumber">
+            <div [ngClass]="{
+                approval: user.approve === 'Approval',
+                reject: user.approve === 'Reject',
+                waiting: user.approve === 'Waiting'
+              }">
+              {{ user.approve }}
+            </div>
+          </td>
+          <div class="eyebtn">
+            <!-- <p-inputSwitch [(ngModel)]="user.isActive" (onChange)="handleChangeActiveUser(user)"></p-inputSwitch> -->
+            <button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"
+              (click)="showDialog(user.id)"></button>
+          </div>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-dialog [header]="'Request.title' | translate" [(visible)]="displayDialogUser" [modal]="true"
+    [style]="{ width: '60%' }" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <div class="headerM">
+      <div class="headerMA">
+        <img [src]="detailData.avatar" class="imagAvata" />
+        <!-- <div class="buttonimage">
+          <button pButton pRipple type="button" [label]="detailData.approve"
+           [ngClass]="{'p-button-success': detailData.approve == 'approval', 'p-button-primary': detailData.approve == 'waiting', 'p-button-danger': detailData.approve == 'reject'}"
+            class="p-button-outlined buttonsuccess w-100" (click)="handleUpdateUser(true)"></button>
+        </div> -->
+      </div>
+      <div class="AllBodyHaeder w-100 row">
+        <form [formGroup]="userdetailsfrom" *ngIf="editUserData" class="d-flex">
+          <div class="col-6">
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'Username.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" [disabled]="true" type="text" pInputText formControlName="userName" />
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'Email.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText formControlName="email" />
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'Phone.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText formControlName="phone" />
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'Bank.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText formControlName="bank" />
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'AccNumber.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText formControlName="accNumber" />
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <p class="stastuspopup">{{'IDCardImage.title' | translate}}</p>
+              <div class="Evidence">
+                <div *ngFor="let evidence of detailData.evidence">
+                  <p>{{ evidence.category }}</p>
+                  <div type="btnimage">
+                    <img [src]="evidence.url ? evidence.url : './assets/images/noImage.png'" class="imageRedvoid"
+                      (click)="takePhoto(evidence.url)" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-4 p-0">
+                <p>{{'IDCard.title' | translate}}:</p>
+              </div>
+              <div class="col-8">
+                <input class="inputName" type="text" pInputText formControlName="idCard" />
+                <div class="error-msg">
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-4 p-0">
+                <p> {{'IDPlace.title' | translate}}:</p>
+              </div>
+              <div class="col-8">
+                <input class="inputName" type="text" pInputText formControlName="idPlace" />
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-4 p-0">
+                <p> {{'IDDate.title' | translate}}:</p>
+              </div>
+              <div class="col-8">
+                <input class="inputName" pInputText formControlName="idDate" />
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-4 p-0">
+                <p> {{'AccHolder.title' | translate}}:</p>
+              </div>
+              <div class="col-8">
+                <input class="inputName" pInputText formControlName="accHolder" />
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-4 p-0">
+                <p> {{'comment.title' | translate}}:</p>
+              </div>
+              <div class="col-8">
+                <input class="inputName" pInputText formControlName="comment" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="dialog-control d-flex w-100 justify-content-end">
+      <button pButton pRipple type="button" label="Cancel" class="p-button-danger mr-2"
+        (click)="displayDialogUser = false"></button>
+      <button pButton pRipple type="button" label="Approve" class="p-button-primary mr-2"
+        (click)="handleApproveUserRequest(detailData.id, '1')"
+        [ngStyle]="{display: detailData.approve != 'Waiting' ? 'none' : ''}"></button>
+      <button pButton pRipple type="button" label="Reject" class="p-button-warning"
+        (click)="handleApproveUserRequest(detailData.id, '-1')"
+        [ngStyle]="{display: detailData.approve != 'Waiting' ? 'none' : ''}"></button>
+
+    </div>
+  </p-dialog>
+
+  <p-dialog [header]="'Image.title' | translate" [(visible)]="displayPhoto" [baseZIndex]="12000"
+    [style]="{ width: '45%' }" class="dialogshowimage">
+    <img [src]="imagetoshowdetailUrl ? imagetoshowdetailUrl : '../../../assets/images/noImage.png' " alt="sdfadsfdsf"
+      class="imageshow">
+  </p-dialog>
+
+  <p-confirmDialog [header]="'Confirmation.title' | translate" [style]="{ width: '600px' }" [baseZIndex]="10000">
+  </p-confirmDialog>
+  <p-toast position="top-center"></p-toast>
+</div>

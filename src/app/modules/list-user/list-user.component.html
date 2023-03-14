@@ -1,0 +1,472 @@
+<div class="bodyAll d-flex flex-column">
+  <div class="header">
+    <div class="sreach">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText [placeholder]="'Search.title' | translate" class="txtsreach" [(ngModel)]="searchKeywords" />
+      </span>
+      <button pButton type="button" [label]="'Search.title' | translate" class="p-button-outlined btnsearch"
+        (click)="handleGetListUser()"></button>
+    </div>
+    <div class="dropdow">
+      <p-button [label]="'New User.title' | translate" icon="pi pi-plus-circle" iconPos="left" class="butn" (click)="showNewUser()">
+      </p-button>
+      <p-dropdown [options]="UserOtion" [(ngModel)]="selectedUserId" optionLabel="name" optionValue="id"
+        [style]="{ minWidth: '240px' }" class="statusdrop" [placeholder]="'Select Role.title' | translate" (onChange)="handleGetListUser()">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <div class="table h-100 mb-0" *ngIf="!!Listuser">
+    <p-table class="tablein" selectionMode="multiple" [paginator]="true" [rows]="8" [value]="Listuser">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="username" class="txttable">
+            {{'Username.title' | translate}} <p-sortIcon field="username"> </p-sortIcon>
+          </th>
+          <th pSortableColumn="email">
+             {{'Email.title' | translate}} <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th pSortableColumn="phone">
+            {{'Phone.title' | translate}} <p-sortIcon field="phone"></p-sortIcon>
+          </th>
+          <th pSortableColumn="role">
+            {{'Role.title' | translate}} <p-sortIcon field="role"></p-sortIcon>
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td class="custumSerialnumber">{{ user.username }}</td>
+          <td class="custumSerialnumber">{{ user.email }}</td>
+          <td class="custumSerialnumber">{{ user.phone }}</td>
+          <td class="custumSerialnumber">{{ user.role }}</td>
+          <div class="eyebtn">
+            <p-inputSwitch [(ngModel)]="user.isActive" (onChange)="handleChangeActiveUser(user)"></p-inputSwitch>
+            <button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"
+              (click)="showDialog(user.role, user.id)"></button>
+          </div>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <p-dialog [header]="'Admin Detail.title' | translate" [(visible)]="displayDialogAdmin" [modal]="true" [style]="{ width: '630px' }"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <div class="headerM">
+      <div class="headerMA">
+        <img [src]="userDetailData.avatar" class="imagAvata" alt=""/>
+        <div class="buttonimage">
+          <button pButton pRipple type="button" [label]="userDetailData.isActive ? 'Activated' : 'Inactivated'"
+            class="p-button-outlined p-button-success buttonsuccess w-100" (click)="handleUpdateUser(true)"></button>
+        </div>
+      </div>
+      <div class="AllBodyHaeder w-100" *ngIf="editAdminData">
+        <div class="bodyHeader">
+          <form [formGroup]="admindetails">
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p class="name">{{'Username.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText [(ngModel)]="editAdminData.userName"
+                  [ngModelOptions]="{ standalone: true }" disabled />
+                <div class="error-msg">
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p class="name">{{'Email.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText formControlName="email"
+                  (input)="isEditUserDetail = true" />
+                <div class="error-msg">
+                  <small class="p-error" *ngIf="
+                      (admindetails.controls.email.dirty ||
+                        admindetails.controls.email.touched) &&
+                      admindetails.controls.email.errors
+                    ">
+                    {{ admindetails.controls.email.errors.message }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p class="name"> {{'Role.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText [(ngModel)]="editAdminData.roleId"
+                  [ngModelOptions]="{ standalone: true }" disabled />
+                <div class="error-msg">
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p class="name">{{'ID Card.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText formControlName="idCard"
+                  (input)="isEditUserDetail = true" />
+                <div class="error-msg">
+                  <small class="p-error" *ngIf="
+                      (admindetails.controls.idCard.dirty ||
+                        admindetails.controls.idCard.touched) &&
+                      admindetails.controls.idCard.errors
+                    ">
+                    {{ admindetails.controls.idCard.errors.message }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p class="name">{{'Phone.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText formControlName="phone"
+                  (input)="isEditUserDetail = true" />
+                <div class="error-msg">
+                  <small class="p-error" *ngIf="
+                      (admindetails.controls.phone.dirty ||
+                        admindetails.controls.phone.touched) &&
+                      admindetails.controls.phone.errors
+                    ">
+                    {{ admindetails.controls.phone.errors.message }}
+                  </small>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-control d-flex w-100 justify-content-end">
+      <button pButton pRipple type="button" label="Cancel" class="p-button-danger mr-2"
+        (click)="displayDialogAdmin = false"></button>
+      <button pButton pRipple type="button" label="Save" [disabled]="admindetails.invalid || !admindetails.dirty"
+        (click)="handleUpdateUser()"></button>
+    </div>
+  </p-dialog>
+  <p-dialog [header]="'User Detail.title' | translate"[(visible)]="displayDialogUser" [modal]="true" [style]="{ width: '60%' }"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <div class="headerM">
+      <div class="headerMA">
+        <img [src]="userDetailData.avatar" class="imagAvata" />
+        <div class="buttonimage">
+          <button pButton pRipple type="button" [label]="userDetailData.isActive ? 'Activated' : 'Inactivated'"
+            class="p-button-outlined p-button-success buttonsuccess w-100" (click)="handleUpdateUser(true)"></button>
+        </div>
+      </div>
+      <div class="AllBodyHaeder w-100 row" *ngIf="editUserData">
+        <form [formGroup]="userdetailsfrom" class="d-flex">
+          <div class="col-6">
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'Username.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText [(ngModel)]="userDetailData.userName"
+                  [ngModelOptions]="{ standalone: true }" disabled />
+                <div class="error-msg">
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'Email.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText formControlName="email" />
+                <div class="error-msg">
+                  <small class="p-error" *ngIf="
+                      (userdetailsfrom.controls.email.dirty ||
+                      userdetailsfrom.controls.email.touched) &&
+                      userdetailsfrom.controls.email.errors
+                    ">
+                    {{ userdetailsfrom.controls.email.errors.message }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'Role.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText [(ngModel)]="userDetailData.roleId"
+                  [ngModelOptions]="{ standalone: true }" disabled />
+                <div class="error-msg">
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'Shop Code.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText [(ngModel)]="userDetailData.shopCode"
+                  [ngModelOptions]="{ standalone: true }" disabled />
+                <div class="error-msg">
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'Shop Name.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText [(ngModel)]="userDetailData.shopName"
+                  [ngModelOptions]="{ standalone: true }" disabled />
+                <div class="error-msg">
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-3 p-0">
+                <p>{{'shopAddress.title' | translate}}:</p>
+              </div>
+              <div class="col-9">
+                <input class="inputName" type="text" pInputText [(ngModel)]="userDetailData.shopAddress"
+                  [ngModelOptions]="{ standalone: true }" disabled />
+                <div class="error-msg">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-4 p-0">
+                <p>{{'Phone.title' | translate}}:</p>
+              </div>
+              <div class="col-8">
+                <input class="inputName" type="text" pInputText formControlName="phone" />
+                <div class="error-msg">
+                  <small class="p-error" *ngIf="
+                    (userdetailsfrom.controls.phone.dirty ||
+                    userdetailsfrom.controls.phone.touched) &&
+                    userdetailsfrom.controls.phone.errors
+                  ">
+                    {{ userdetailsfrom.controls.phone.errors.message }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-4 p-0">
+                <p> {{'ID Card.title' | translate}}:</p>
+              </div>
+              <div class="col-8">
+                <input class="inputName" type="text" pInputText formControlName="idCard" />
+                <div class="error-msg">
+                  <small class="p-error" *ngIf="
+                      (userdetailsfrom.controls.idCard.dirty ||
+                      userdetailsfrom.controls.idCard.touched) &&
+                      userdetailsfrom.controls.idCard.errors
+                    ">
+                    {{ userdetailsfrom.controls.idCard.errors.message }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-4 p-0">
+                <p>{{'Bank.title' | translate}}:</p>
+              </div>
+              <div class="col-8">
+                <p-dropdown class="w-100" [options]="Bank" optionLabel="vn_name" optionValue="vn_name" [disabled]="true"></p-dropdown>
+                <div class="error-msg">
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-4 p-0">
+                <p>{{'Account Number.title' | translate}}:</p>
+              </div>
+              <div class="col-8">
+                <input class="inputName" type="text" pInputText [(ngModel)]="userDetailData.accountNumber"
+                [ngModelOptions]="{ standalone: true }" disabled />
+              <div class="error-msg">
+              </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center p-0 mb-3">
+              <div class="col-4 p-0">
+                <p>{{'Account Holders.title' | translate}}:</p>
+              </div>
+              <div class="col-8">
+                <input class="inputName" type="text" pInputText [(ngModel)]="userDetailData.userNameBank"
+                [ngModelOptions]="{ standalone: true }" disabled />
+              <div class="error-msg">
+              </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="dialog-control d-flex w-100 justify-content-end">
+      <button pButton pRipple type="button" label="Cancel" class="p-button-danger mr-2"
+        (click)="displayDialogUser = false"></button>
+      <button pButton pRipple type="button" label="Save" (click)="handleUpdateUser()"
+        [disabled]="userdetailsfrom.invalid || !userdetailsfrom.dirty"></button>
+    </div>
+  </p-dialog>
+  <p-dialog [header]="'Create New User.title' | translate"  [(visible)]="displayNewUser" [modal]="true" [style]="{ width: '35%' }"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <div class="popupNewUser">
+      <form [formGroup]="createUserForm">
+        <div class="styStatus">
+          <p class="statusCreateNew">{{'Username.title' | translate}}</p>
+          <input [(ngModel)]="username" class="nameNewUser" formControlName="userName" />
+          <div class="error-msg">
+            <small class="p-error" *ngIf="
+                (createUserForm.controls.userName.dirty ||
+                  createUserForm.controls.userName.touched) &&
+                createUserForm.controls.userName.errors
+              ">
+              {{ createUserForm.controls.userName.errors.message }}
+            </small>
+          </div>
+        </div>
+        <div class="styStatus">
+          <p class="statusCreateNew">{{'Email.title' | translate}}</p>
+          <input class="nameNewUser" [(ngModel)]="email" formControlName="email" />
+          <div class="error-msg">
+            <small class="p-error" *ngIf="
+                (createUserForm.controls.email.dirty ||
+                  createUserForm.controls.email.touched) &&
+                createUserForm.controls.email.errors
+              ">
+              {{ createUserForm.controls.email.errors.message }}
+            </small>
+          </div>
+        </div>
+        <div class="styStatus2">
+          <div>
+            <p class="statusCreateNew">{{'ID Card.title' | translate}}</p>
+            <input class="nameIDcard" [(ngModel)]="idcard" formControlName="idCard" />
+            <div class="error-msg">
+              <small class="p-error" *ngIf="
+                  (createUserForm.controls.idCard.dirty ||
+                    createUserForm.controls.idCard.touched) &&
+                  createUserForm.controls.idCard.errors
+                ">
+                {{ createUserForm.controls.idCard.errors.message }}
+              </small>
+            </div>
+          </div>
+          <div>
+            <p class="statusCreateNew">{{'Phone.title' | translate}}</p>
+            <input class="namePhone" [(ngModel)]="phone" formControlName="phone" />
+            <div class="error-msg">
+              <small class="p-error" *ngIf="
+                  (createUserForm.controls.phone.dirty ||
+                    createUserForm.controls.phone.touched) &&
+                  createUserForm.controls.phone.errors
+                ">
+                {{ createUserForm.controls.phone.errors.message }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="styStatus">
+          <p class="statusCreateNew">{{'Role.title' | translate}}</p>
+          <p-dropdown [style]="{ minWidth: '100%' }" [options]="createUserOption" [(ngModel)]="roleid"
+            optionLabel="name" optionValue="id" [placeholder]="'Select Role.title' | translate" scrollHeight="100px"
+            (onChange)="handleChangeRole()" formControlName="roleId" >
+          </p-dropdown>
+          <div class="error-msg">
+            <small class="p-error" *ngIf="
+                (createUserForm.controls.roleId.dirty ||
+                  createUserForm.controls.roleId.touched) &&
+                createUserForm.controls.roleId.errors
+              ">
+              {{ createUserForm.controls.roleId.errors.message }}
+            </small>
+          </div>
+        </div>
+        <div class="styStatus2" *ngIf="showInfoForSO">
+          <div>
+            <p class="statusCreateNew">{{'Shop Code.title' | translate}}</p>
+            <input #shopCodeInput class="nameIDcard" [(ngModel)]="shopcode" formControlName="shopcode"
+              (blur)="getShopNameByShopCode()" />
+            <div class="error-msg">
+              <small class="p-error" *ngIf="
+                  (createUserForm.controls.shopcode.dirty ||
+                    createUserForm.controls.shopcode.touched) &&
+                  createUserForm.controls.shopcode.errors
+                ">
+                {{ createUserForm.controls.shopcode.errors.message }}
+              </small>
+            </div>
+          </div>
+          <div>
+            <p class="statusCreateNew">{{'Shop Name.title' | translate}}</p>
+            <!-- <input class="namePhone" [(ngModel)]="shopname" disabled /> -->
+            <input class="inputName" type="text" pInputText [(ngModel)]="shopname"
+                  [ngModelOptions]="{ standalone: true }" disabled />
+            <div class="error-msg"></div>
+          </div>
+        </div>
+        <div class="styStatus" *ngIf="showInfoForSO">
+          <p class="statusCreateNew">{{'shopAddress.title' | translate}}</p>
+          <input class="nameNewUser" [(ngModel)]="shopAddress" formControlName="shopAddress" />
+          <div class="error-msg">
+            <small class="p-error" *ngIf="
+                (createUserForm.controls.shopAddress.dirty ||
+                  createUserForm.controls.shopAddress.touched) &&
+                createUserForm.controls.shopAddress.errors
+              ">
+              {{ createUserForm.controls.shopAddress.errors.message }}
+            </small>
+          </div>
+        </div>
+        <div class="styStatus" *ngIf="showInfoForSO">
+          <p class="statusCreateNew">{{'Bank.title' | translate}}</p>
+          <p-dropdown [style]="{ minWidth: '100%' }" [options]="Bank" optionLabel="vn_name" optionValue="vn_name"
+           [(ngModel)]="bankname" [placeholder]="'Select Bank.title' | translate" formControlName="bankName"></p-dropdown>
+        </div>
+        <div class="styStatus2" *ngIf="showInfoForSO">
+          <div>
+            <p class="statusCreateNew">{{'Account Number.title' | translate}}</p>
+            <input class="nameIDcard" [(ngModel)]="accountnumber" formControlName="accountnumber" required />
+            <div class="error-msg">
+              <small class="p-error" *ngIf="
+                  (createUserForm.controls.accountnumber.dirty ||
+                    createUserForm.controls.accountnumber.touched) &&
+                  createUserForm.controls.accountnumber.errors
+                ">
+                {{ createUserForm.controls.accountnumber.errors.message }}
+              </small>
+            </div>
+          </div>
+          <div>
+            <p class="statusCreateNew">{{'Account Holders.title' | translate}}</p>
+            <input class="namePhone" [(ngModel)]="usernamebank" formControlName="usernamebank" />
+            <div class="error-msg">
+              <small class="p-error" *ngIf="
+                  (createUserForm.controls.usernamebank.dirty ||
+                    createUserForm.controls.usernamebank.touched) &&
+                  createUserForm.controls.usernamebank.errors
+                ">
+                {{ createUserForm.controls.usernamebank.errors.message }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footerbtn">
+      <button class="btnSubmit" [disabled]="!createUserForm.valid" (click)="handleCreate()">
+        {{'SUBMIT.title' | translate}}
+      </button>
+    </div>
+  </p-dialog>
+
+  <p-confirmDialog [header]="'Confirmation.title' | translate" [style]="{ width: '600px' }" [baseZIndex]="10000"></p-confirmDialog>
+  <p-toast position="top-center"></p-toast>
+</div>

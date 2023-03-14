@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="centerView">
+    <img src="../../../assets/images/loginImage.png" class="image">
+
+    <form class="form__login" [formGroup]="loginForm">
+      <div class="contentLogin">
+        <h2 class="title">Sign in to</h2>
+        <h2 class="aqua">AQUA</h2>
+      </div>
+
+      <div class="form-group" style="margin-top: 20px;">
+        <span class="p-input-icon-left">
+          <i class="pi pi-user"></i>
+          <input type="text" class="p-inputtext-lg email" [(ngModel)]="username" name="username" pInputText
+            placeholder=" Username" formControlName="userName" required>
+        </span>
+        <div class="error-msg">
+          <small class="p-error" *ngIf="(loginForm.controls.userName.dirty || loginForm.controls.userName.touched)
+             && loginForm.controls.userName.errors">
+            {{loginForm.controls.userName.errors.message}}
+          </small>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top: 30px;">
+        <span class="p-input-icon-left viewpassword">
+          <div class="divinputpassword">
+            <i class="pi pi-lock icon"></i>
+            <input [type]="!show ? 'password' : 'text' " placeholder="Password" class='password1' [(ngModel)]="password"
+              name="password" formControlName="password" required (keypress.enter)="handleLogin()">
+            <i class="pi pi-eye-slash icon" *ngIf="!show" (click)="show = !show"></i>
+            <i class="pi pi-eye icon" *ngIf="show" (click)="show = !show"></i>
+          </div>
+        </span>
+        <div class="error-msg">
+          <small id="username2-help" class="p-error" *ngIf="(loginForm.controls.password.dirty || loginForm.controls.password.touched)
+            && loginForm.controls.password.errors">
+            {{loginForm.controls.password.errors.message}}
+          </small>
+        </div>
+      </div>
+      <button class="btn btn-primary btnlogin" [disabled]="!loginForm.valid" (click)="handleLogin()">Login</button>
+    </form>
+    <p-toast position="top-center"></p-toast>
+  </div>
+</div>

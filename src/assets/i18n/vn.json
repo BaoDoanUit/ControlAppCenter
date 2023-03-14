@@ -1,0 +1,231 @@
+{
+  "listPPC": {
+    "title": "Danh sách chờ",
+    "text": ""
+  },
+  "listUser": {
+    "title": "Danh sách người dùng",
+    "text": ""
+  },
+  "listUserApproval": {
+    "title": "Danh sách duyệt đăng kí tài khoản khách hàng"
+  },
+  "listUserRequest": {
+    "title": "Danh sách duyệt yêu cầu"
+  },
+  "Request": { "title": "Yêu cầu" },
+
+  "process": {
+    "title": "Đang chờ xử lý"
+  },
+  "UseManagernent": {
+    "title": "Quản lý người dùng"
+  },
+  "CustomerName": {
+    "title": "Tên khách hàng"
+  },
+  "UserSubmited": {
+    "title": "Người gửi"
+  },
+  "SerialNumber": {
+    "title": "Số Seri"
+  },
+  "ModalName": {
+    "title": "Tên sản phẩm"
+  },
+  "DateSubmited": {
+    "title": "Ngày gửi"
+  },
+  "WaittingDay": {
+    "title": "Thời gian chờ"
+  },
+  "Status": {
+    "title": "Trạng thái"
+  },
+  "Search": {
+    "title": "Tìm Kiếm"
+  },
+  "selectstatus": {
+    "title": "Chọn trạng thái"
+  },
+  "PPCDeatial": {
+    "title": "Chi tiết"
+  },
+  "GeneralInformation": {
+    "title": "Thông tin chung"
+  },
+  "Selloutdate": {
+    "title": "Ngày bán hết"
+  },
+  "CustomerPhone": {
+    "title": "số điện thoại KH"
+  },
+  "Evidence": {
+    "title": "Chứng cứ"
+  },
+  "note": {
+    "title": "Ghi chú"
+  },
+  "Activity": {
+    "title": "Hoạt Động"
+  },
+  "Description": {
+    "title": "Miêu tả"
+  },
+  "Username": {
+    "title": "Tên đăng nhập"
+  },
+  "APPROVE": {
+    "title": "Duyệt"
+  },
+  "REJECT": {
+    "title": "Từ chối"
+  },
+  "Email": {
+    "title": "E-mail"
+  },
+  "Validation": {
+    "title": "Thẩm định"
+  },
+  "Phone": {
+    "title": "SĐT"
+  },
+  "Role": {
+    "title": "Vai trò"
+  },
+  "IDCard": {
+    "title": "CMND"
+  },
+  "IDPlace": {
+    "title": "Nơi cấp"
+  },
+  "IDDate": {
+    "title": "Ngày  cấp"
+  },
+  "DateBirth": {
+    "title": "Ngày sinh"
+  },
+  "RequestType": {
+    "title": "Loại yêu cầu"
+  },
+  "ID Card": {
+    "title": "CMND/CCCD"
+  },
+  "Shop Code": {
+    "title": "Mã của hàng"
+  },
+  "Shop Name": {
+    "title": "Tên của hàng"
+  },
+  "Bank": {
+    "title": "Ngân Hàng"
+  },
+  "Account Number": {
+    "title": "Số tài khoản"
+  },
+  "Account Holders": {
+    "title": "Tên chủ TK"
+  },
+  "SUBMIT": {
+    "title": "Gửi đi"
+  },
+  "Select Status": {
+    "title": "Chọn trạng thái"
+  },
+  "Select Role": {
+    "title": "Chọn vai trò"
+  },
+  "Select Bank": {
+    "title": "Chọn ngân hàng"
+  },
+  "New User": {
+    "title": "Tạo mới người dùng"
+  },
+  "activated": {
+    "title": "Bạn có muốn kích hoạt người dùng này không?"
+  },
+  "inactivated": {
+    "title": "Bạn có muốn hủy kích hoạt người dùng này không?"
+  },
+  "Confirmation": {
+    "title": "Xác nhận"
+  },
+  "Admin Detail": {
+    "title": "Chi tiết quản trị viên"
+  },
+  "User Detail": {
+    "title": "Chi tiết người dùng"
+  },
+  "Create New User": {
+    "title": "Tạo người dùng mới"
+  },
+  "Image": {
+    "title": "Hình ảnh"
+  },
+  "PPC Detail": {
+    "title": "Chi tiết danh sách chờ"
+  },
+  "update": {
+    "title": "Bạn có chắc muốn cập nhật người dùng ?"
+  },
+  "updatePPC": {
+    "title": "Bạn có chắc muốn cập nhật danh sách chờ ?"
+  },
+  "PPCDetail": {
+    "title": "Chi tiết danh sách chờ "
+  },
+  "success": {
+    "title": "Thành Công"
+  },
+  "error": {
+    "title": "Thất bại"
+  },
+  "updatesuccess": {
+    "title": "Cập nhật thành công !"
+  },
+  "Approve": {
+    "title": "Xét duyệt"
+  },
+  "shopAddress": {
+    "title": "Địa chỉ cửa hàng"
+  },
+  "IDCardImage": {
+    "title": "Hình chứng minh nhân dân"
+  },
+  "Select Request Status": {
+    "title": "Chọn loại yêu cầu"
+  },
+  "AccNumber": {
+    "title": "Số tài khoản"
+  },
+  "AccHolder": {
+    "title": "Chủ tài khoản"
+  },
+  "listPPCV3" :{
+    "title" : "Danh sách gói ppc"
+  },
+  "PackageName": {
+    "title" : "Tên package"
+  },
+  "PackageDate": {
+    "title" : "Ngày tạo package"
+  },
+  "Percent": {
+    "title" : "Percent"
+  },
+  "Qty": {
+    "title" : "Số lượng"
+  },
+  "WaitingDate": {
+    "title" : "Số ngày chờ"
+  },
+  "ApproveByName": {
+    "title" : "Duyệt bởi"
+  },
+  "PackageDetail":{
+    "title" : "Chi tiết package"
+  },
+  "comment" : {
+    "title" : "Phản hồi"
+  }
+}

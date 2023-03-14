@@ -1,0 +1,233 @@
+{
+  "listPPC":{
+    "title": "List PPC",
+    "text" : ""
+  },
+  "listUser":{
+    "title": "List User",
+    "text" : ""
+  },
+  "listUserApproval": {
+    "title": "Review Customer Registration List"
+  },
+  "listUserRequest": {
+    "title": "User Request List"
+  },
+  "Request": {"title": "Request"},
+  "process":{
+    "title":"Process Pending Case"
+  },
+  "UseManagernent":{
+    "title":"User Managerment"
+  },
+  "CustomerName":{
+    "title":"Customer Name"
+  },
+  "UserSubmited":{
+    "title":"User Submitted"
+  },
+  "SerialNumber":{
+    "title":"Serial Number"
+  },
+  "ModalName":{
+    "title":"Modal Name"
+  },
+  "DateSubmited":{
+    "title":"Date Submitted"
+  },
+  "WaittingDay":{
+    "title":"Waiting Day"
+  },
+  "Status":{
+    "title":"Status"
+  },
+  "Search":{
+    "title":"Search"
+  },
+  "selectstatus":{
+    "title":"Select Status"
+  },
+  "PPCDeatial":{
+    "title":"PPC Detail"
+  },
+  "GeneralInformation":{
+    "title":"General Information"
+  },
+  "Selloutdate":{
+    "title":"Sell out Date"
+  },
+  "CustomerPhone":{
+    "title":"CustomerPhone"
+  },
+  "Evidence":{
+    "title":"Evidence"
+  },
+  "note":{
+    "title":"Note"
+  },
+  "Activity":{
+    "title":"Activity"
+  },
+  "Description":{
+    "title":"Description"
+  },
+  "Username":{
+    "title":"Username"
+  },
+  "APPROVE":{
+    "title":"APPROVE"
+  },
+  "REJECT":{
+    "title":"REJECT"
+  },
+  "Email":{
+    "title":"Email"
+  },
+  "Validation":{
+    "title":"Validation"
+  },
+  "Phone":{
+    "title":"Phone"
+  },
+  "ID Card":{
+    "title":"ID Card"
+  },
+  "Shop Code":{
+    "title":"Shop Code"
+  },
+  "Shop Name":{
+    "title":"Shop Name"
+  },
+  "Bank":{
+    "title":"Bank"
+  },
+  "Account Number":{
+    "title":"Account Number"
+  },
+  "Account Holders":{
+    "title":"Account Holders"
+  },
+  "SUBMIT":{
+    "title":"SUBMIT"
+  },
+  "Select Status" : {
+    "title": "Chọn Status"
+  },
+  "Select Role":{
+    "title":"Select Role"
+  },
+  "Select Bank":{
+    "title":"Select Bank"
+  },
+  "New User":{
+    "title":"New User"
+  },
+  "activated":{
+    "title":"Are you sure to activated this user?"
+  },
+  "inactivated":{
+    "title":"Are you sure to inactivated this user?"
+  },
+  "Confirmation":{
+    "title":"Confirmation"
+  },
+  "Admin Detail":{
+    "title":"Admin Detail"
+  },
+  "User Detail":{
+    "title":"User Detail"
+  },
+  "Create New User":{
+    "title":"Create New User"
+  },
+  "Image":{
+    "title":"Image"
+  },
+  "PPC Detail":{
+    "title":"PPC Detail"
+  },
+  "update":{
+    "title":"Are you sure to update user"
+  },
+  "updatePPC":{
+    "title":"Are you sure to update this PPC?"
+  },
+  "PPCDetail":{
+    "title":"PPC Detail"
+  },
+  "success":{
+    "title":"Success"
+  },
+  "error":{
+    "title":"Error"
+  },
+  "updatesuccess":{
+    "title":"Update success !"
+  },
+  "Role":{
+    "title":"Role"
+  },
+  "IDCard" : {
+    "title": "ID Card"
+  },
+  "IDPlace": {
+    "title": "ID Place"
+  },
+  "IDDate": {
+    "title": "ID Date"
+  },
+  "DateBirth": {
+    "title": "Date of Birth"
+  },
+  "RequestType": {
+    "title": "Request Type"
+  },
+  "Approve":{
+    "title": "Approval"
+  },
+  "shopAddress":{
+    "title":"Shop Address"
+  },
+  "IDCardImage" : {
+    "title": "Identity Card Image"
+  },
+  "Select Request Status": {
+    "title": "Choose request type"
+  },
+  "AccNumber" :{
+    "title" : "Account Number"
+  },
+  "AccHolder" : {
+    "title" : "Account Holder"
+  },
+  "listPPCV3" :{
+    "title" : "List Package PPC"
+  },
+  "PackageName": {
+    "title" : "Package Name"
+  },
+  "PackageDate": {
+    "title" : "Package Date"
+  },
+  "Percent": {
+    "title" : "Percent"
+  },
+  "Qty": {
+    "title" : "Quantity"
+  },
+  "TargetApprove": {
+    "title" : "% Target"
+  },
+  "WaitingDate": {
+    "title" : "Waiting Day"
+  },
+  "ApproveByName": {
+    "title" : "Approve By"
+  },
+  "PackageDetail":{
+    "title" : "Package Detail"
+  },
+  "comment": {
+    "title" : "Comment"
+  }
+}
